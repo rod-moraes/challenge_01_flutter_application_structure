@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
 class CardWidget extends StatelessWidget {
-  String note;
-  GestureTapCallback onTap;
+  final String note;
+  final GestureTapCallback onTap;
   CardWidget({
     Key? key,
     required this.note,

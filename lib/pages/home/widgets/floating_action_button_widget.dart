@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class FloatingActionButtonWidget extends StatelessWidget {
-  VoidCallback onPressed;
+  final VoidCallback onPressed;
 
   FloatingActionButtonWidget({
     Key? key,
@@ -10,9 +10,10 @@ class FloatingActionButtonWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return FloatingActionButton(
-      child: Icon(Icons.add),
-      onPressed: this.onPressed,
+    return ElevatedButton.icon(
+      onPressed: onPressed,
+      icon: Icon(Icons.add),
+      label: Text("Adicionar"),
     );
   }
 }

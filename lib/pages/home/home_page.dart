@@ -12,38 +12,40 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: Text("NOTES"),
-          centerTitle: true,
+      appBar: AppBar(
+        title: Text("NOTES"),
+        centerTitle: true,
+      ),
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            for (int i = 0; i < notes.length; i++)
+              CardWidget(
+                  note: notes[i],
+                  onTap: () async {
+                    final note = await Navigator.pushNamed(
+                        context, "/create-note",
+                        arguments: notes[i]);
+                    if (note != null) {
+                      final description = note as String;
+                      if (description.isEmpty) {
+                        notes.removeAt(i);
+                      } else
+                        notes[i] = description;
+                    }
+                    setState(() {});
+                  })
+          ],
         ),
-        body: SingleChildScrollView(
-          child: Column(
-            children: [
-              for (int i = 0; i < notes.length; i++)
-                CardWidget(
-                    note: notes[i],
-                    onTap: () async {
-                      final note = await Navigator.pushNamed(
-                          context, "/create-note",
-                          arguments: notes[i]);
-                      if (note != null) {
-                        final description = note as String;
-                        if (description.isEmpty) {
-                          notes.removeAt(i);
-                        } else
-                          notes[i] = description;
-                      }
-                      setState(() {});
-                    })
-            ],
-          ),
-        ),
-        floatingActionButton: FloatingActionButtonWidget(
-          onPressed: () async {
-            final note = await Navigator.pushNamed(context, "/create-note");
-            if (note != null) notes.add(note as String);
-            setState(() {});
-          },
-        ));
+      ),
+      floatingActionButton: FloatingActionButtonWidget(
+        onPressed: () async {
+          final note = await Navigator.pushNamed(context, "/create-note");
+          if (note != null) notes.add(note as String);
+          setState(() {});
+        },
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+    );
   }
 }

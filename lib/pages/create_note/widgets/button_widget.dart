@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class ButtonWidget extends StatelessWidget {
-  String description;
+  final String description;
   ButtonWidget({
     Key? key,
     required this.description,
